@@ -194,20 +194,20 @@ const value = ref(60);
 }
 
 .vue-slider-rail {
-  height: 14px;
+  height: 14px !important;
 }
 
 .vue-slider-dot {
   width: 18px !important;
   height: 36px !important;
-  background: #f4fef3;
-  display: flex;
-  justify-content: center;
+  background: #f4fef3 !important;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .vue-slider-dot-handle {
   width: 10px !important;
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
 
 .vue-slider-rail {
@@ -227,31 +227,31 @@ const value = ref(60);
 
 .vue-slider-dot-tooltip-inner {
   background: #fd9089 !important;
-  width: 28px;
-  height: 23px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 28px !important;
+  height: 23px !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .vue-slider-dot-tooltip {
-  visibility: visible;
+  visibility: visible !important;
 }
 
 .vue-slider-dot-tooltip-inner-top:after {
-  display: none;
+  display: none !important;
 }
 
 .vue-slider-dot-tooltip-text {
-  font-size: 10px;
-  padding: 0;
+  font-size: 10px !important;
+  padding: 0 !important;
 }
 
 .vue-slider-dot-handle {
-  background-color: #7093cb;
-  border: none;
-  box-shadow: none;
+  background-color: #7093cb !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .vue-slider.vue-slider-ltr {
