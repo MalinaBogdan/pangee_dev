@@ -1,14 +1,17 @@
 <template>
+  <BaseHeader />
   <GridLayout />
 </template>
 
 <script>
 import GridLayout from "./components/GridLayout.vue";
+import BaseHeader from "./components/BaseHeader.vue";
 
 export default {
   name: "App",
   components: {
     GridLayout,
+    BaseHeader,
   },
 };
 </script>
@@ -23,6 +26,5 @@ html {
   font-family: "Work Sans", sans-serif;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
