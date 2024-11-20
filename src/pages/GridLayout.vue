@@ -56,15 +56,15 @@
 <script setup>
 import { ref } from "vue";
 import draggable from "vuedraggable";
-import EcommerceSales from "./EcommerceSales.vue";
-import DataSpend from "./DataSpend.vue";
-import AmountSpend from "./AmountSpend.vue";
-import TopProduct from "./TopProduct.vue";
-import DocumentAccess from "./DocumentAccess.vue";
-import TopKeywords from "./TopKeywords.vue";
-import QuickOverView from "./QuickOverView.vue";
-import CategoriesTrend from "./CategoriesTrend.vue";
-import RevenueTrends from "./RevenueTrends.vue";
+import EcommerceSales from "../components/EcommerceSales.vue";
+import DataSpend from "../components/DataSpend.vue";
+import AmountSpend from "../components/AmountSpend.vue";
+import TopProduct from "../components/TopProduct.vue";
+import DocumentAccess from "../components/DocumentAccess.vue";
+import TopKeywords from "../components/TopKeywords.vue";
+import QuickOverView from "../components/QuickOverView.vue";
+import CategoriesTrend from "../components/CategoriesTrend.vue";
+import RevenueTrends from "../components/RevenueTrends.vue";
 
 let list1 = ref([
   { id: 1, component: EcommerceSales },

@@ -110,11 +110,6 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
-.widget {
-  position: relative;
-  width: 100%;
-}
-
 #line-chart {
   position: relative;
   z-index: 1;

@@ -1,10 +1,17 @@
 <template>
   <div class="base-header">
     <div class="menu">
-      <div class="item">Home</div>
+      <RouterLink to="/"
+        ><div class="item" :class="{ active: path == '/' }">
+          Home
+        </div></RouterLink
+      >
       <div
         class="item"
-        @click="activeMenu = activeMenu == 'InternalDocument' ? '' : 'InternalDocument'"
+        @click="
+          activeMenu =
+            activeMenu == 'InternalDocument' ? '' : 'InternalDocument'
+        "
         :class="{ active: activeMenu == 'InternalDocument' }"
       >
         Internal Document
@@ -21,7 +28,11 @@
           />
         </svg>
       </div>
-      <div class="item">Publishers</div>
+      <RouterLink to="/publishers">
+        <div class="item" :class="{ active: path == '/publisher' }">
+          Publishers
+        </div></RouterLink
+      >
       <div class="item">Open Source</div>
       <div
         class="item"
@@ -54,8 +65,14 @@ import { ref } from "vue";
 import InternalDocument from "./InternalDocumentMenu.vue";
 import Ecommerce from "./EcommerceMenu.vue";
 import ClickOutside from "vue-click-outside";
+import { useRouter, RouterLink } from "vue-router";
 
 let activeMenu = ref("");
+
+const router = useRouter();
+const path = router.currentRoute.value.path;
+
+console.log(router, "router");
 </script>
 
 <script>

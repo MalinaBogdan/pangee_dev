@@ -1,16 +1,18 @@
 <template>
-  <BaseHeader />
-  <GridLayout />
+  <div class="app">
+    <BaseHeader />
+    <RouterView />
+  </div>
 </template>
 
 <script>
-import GridLayout from "./components/GridLayout.vue";
 import BaseHeader from "./components/BaseHeader.vue";
+import { RouterView } from "vue-router";
 
 export default {
   name: "App",
   components: {
-    GridLayout,
+    RouterView,
     BaseHeader,
   },
 };
@@ -22,9 +24,14 @@ export default {
 html {
   background-color: #e3ece7;
 }
+
 #app {
   font-family: "Work Sans", sans-serif;
   text-align: center;
   color: #2c3e50;
+}
+a {
+  color: black;
+  text-decoration: none;
 }
 </style>

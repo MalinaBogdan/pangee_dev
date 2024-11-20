@@ -64,12 +64,6 @@ const options = ref({
 </script>
 
 <style lang="scss">
-.widget .bar {
-  position: relative;
-  height: 300px;
-  width: 100%;
-}
-
 .widget .bar canvas {
   width: 100% !important;
   height: 150px !important;

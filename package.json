@@ -17,6 +17,7 @@
     "vue-chart-3": "^3.1.8",
     "vue-click-outside": "^1.1.0",
     "vue-grid-layout": "^2.4.0",
+    "vue-router": "^4.4.5",
     "vue3-grid-layout": "^1.0.0",
     "vuedraggable": "^4.1.0"
   },

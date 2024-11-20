@@ -3,6 +3,7 @@
 }
 
 .widget {
+    position: relative;
     width: calc(100% - 42px);
     background: #eef3ef;
     border-radius: 20px;
@@ -16,7 +17,7 @@
         width: 37px;
         height: 37px;
         border-radius: 12px;
-        border: 1px solid #E3E3E3;
+        border: 1px solid #e3e3e3;
         background: white;
         display: flex;
         justify-content: center;
@@ -32,6 +33,7 @@
     .bar {
         margin-top: 20px;
         height: 150px;
+        position: relative;
     }
 
     .grey-text {
@@ -74,7 +76,7 @@
             justify-content: space-between;
 
             &:nth-child(even) {
-                background: #DBE0DC;
+                background: #dbe0dc;
             }
 
             p {
@@ -88,7 +90,7 @@
         height: 1px;
         width: 100%;
         margin-top: 15px;
-        background: #D9DEDA;
+        background: #d9deda;
     }
 
     .bottom-amount {
@@ -135,20 +137,20 @@
         }
 
         .header {
-            color: #A3AED0;
+            color: #a3aed0;
             font-size: 14px;
         }
 
         .value {
-            color: #2B3674;
+            color: #2b3674;
             font-weight: 600;
             margin-top: 24px;
         }
     }
 
     &.green {
-        background: #F4FEF3;
-        border: 1px solid #D6DBD7;
+        background: #f4fef3;
+        border: 1px solid #d6dbd7;
         width: calc(100% - 54px);
         padding: 26px;
         padding-bottom: 30px;
@@ -191,7 +193,7 @@
                 column-gap: 5px;
 
                 .time {
-                    color: #797B79;
+                    color: #797b79;
                 }
             }
         }
@@ -232,13 +234,13 @@
                     }
 
                     .name {
-                        color: #A3AED0;
+                        color: #a3aed0;
                         font-size: 12px;
                     }
                 }
 
                 .percent {
-                    color: #2B3674;
+                    color: #2b3674;
                     font-size: 18px;
                     font-weight: 600;
                     margin-top: 2px;
