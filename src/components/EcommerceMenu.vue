@@ -28,15 +28,35 @@ import EcoomerceImg3 from "../assets/images/ecommerce3.png";
 import EcoomerceImg4 from "../assets/images/ecommerce4.png";
 import EcoomerceImg5 from "../assets/images/ecommerce5.png";
 import EcoomerceImg6 from "../assets/images/ecommerce6.png";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const path = router.currentRoute.value.path;
+
+const colorArrow = path == "/publishers" ? "#e4ebe7" : "#eff8ef";
 
 const ecommerceData = ref([
   {
     title: "Ready to wear",
-    items: ["Dresses", "Skirts", "Top", "Pants", "Knitwears", "Coats & Jackets"],
+    items: [
+      "Dresses",
+      "Skirts",
+      "Top",
+      "Pants",
+      "Knitwears",
+      "Coats & Jackets",
+    ],
   },
   {
     title: "Accessories",
-    items: ["Bags", "SLG", "Belts", "Tech", "Luggage and Trunks", "Bathing Suit"],
+    items: [
+      "Bags",
+      "SLG",
+      "Belts",
+      "Tech",
+      "Luggage and Trunks",
+      "Bathing Suit",
+    ],
   },
   {
     title: "Shoes",
@@ -78,6 +98,6 @@ const imgs = ref([
   transform: rotate(315deg);
   border-top: 1px solid white;
   border-right: 1px solid white;
-  background-color: #eff8ef;
+  background-color: v-bind(colorArrow);
 }
 </style>

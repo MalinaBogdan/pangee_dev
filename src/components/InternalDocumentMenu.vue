@@ -2,6 +2,23 @@
   <div @mouseleave="subMenu = {}">
     <div class="content internal-document">
       <div class="dialog-arrow"></div>
+      <div class="search" @click="showSearch = !showSearch">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M22 22L20 20M21 11.5C21 16.7467 16.7467 21 11.5 21C6.25329 21 2 16.7467 2 11.5C2 6.25329 6.25329 2 11.5 2C16.7467 2 21 6.25329 21 11.5Z"
+            stroke="#292D32"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
       <div class="left">
         <div class="title">Sub Menu</div>
         <div class="sub-menu">
@@ -151,15 +168,18 @@
         {{ subItem }}
       </div>
     </div>
+
+    <Search v-if="showSearch" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import Search from "./SearchElement.vue";
 
 const toggleData = ref(false);
-
 const subMenu = ref({});
+const showSearch = ref(false);
 
 const menu = ref([
   {
@@ -180,7 +200,15 @@ const menu = ref([
   {
     title: "Publishers",
     itemsName: "Publishers Name",
-    items: ["Vogue", "Elle", "Conde Nast", "Versace", "Gucci", "Parada", "Channel"],
+    items: [
+      "Vogue",
+      "Elle",
+      "Conde Nast",
+      "Versace",
+      "Gucci",
+      "Parada",
+      "Channel",
+    ],
   },
   {
     title: "Performance",
@@ -191,7 +219,15 @@ const menu = ref([
   {
     title: "Media",
     itemsName: "Media Name",
-    items: ["Vogue", "Elle", "Conde Nast", "Versace", "Gucci", "Parada", "Channel"],
+    items: [
+      "Vogue",
+      "Elle",
+      "Conde Nast",
+      "Versace",
+      "Gucci",
+      "Parada",
+      "Channel",
+    ],
   },
 ]);
 </script>
