@@ -178,5 +178,6 @@ const data = ref([
     rgba(208, 213, 224, 0) 43%,
     rgba(176, 182, 208, 1) 47%
   );
+  box-shadow: 12px -3px 8px -5px rgba(0, 0, 0, 0.75);
 }
 </style>
