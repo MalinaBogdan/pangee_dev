@@ -55,8 +55,14 @@
       </div>
       <div class="item">Financials</div>
     </div>
-    <InternalDocument v-if="activeMenu == 'InternalDocument'" />
-    <Ecommerce v-if="activeMenu == 'Ecommerce'" />
+    <InternalDocument
+      v-on-click-outside="() => (activeMenu = '')"
+      v-if="activeMenu == 'InternalDocument'"
+    />
+    <Ecommerce
+      v-on-click-outside="() => (activeMenu = '')"
+      v-if="activeMenu == 'Ecommerce'"
+    />
   </div>
 </template>
 
@@ -66,6 +72,7 @@ import InternalDocument from "./InternalDocumentMenu.vue";
 import Ecommerce from "./EcommerceMenu.vue";
 import ClickOutside from "vue-click-outside";
 import { useRouter, RouterLink } from "vue-router";
+import { vOnClickOutside } from "@vueuse/components";
 
 let activeMenu = ref("");
 

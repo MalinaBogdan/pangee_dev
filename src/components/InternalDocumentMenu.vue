@@ -169,13 +169,14 @@
       </div>
     </div>
 
-    <Search v-if="showSearch" />
+    <Search v-on-click-outside="() => (showSearch = false)" v-if="showSearch" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import Search from "./SearchElement.vue";
+import { vOnClickOutside } from "@vueuse/components";
 
 const toggleData = ref(false);
 const subMenu = ref({});
