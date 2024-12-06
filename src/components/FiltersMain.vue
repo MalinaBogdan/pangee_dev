@@ -1,5 +1,5 @@
 <template>
-  <div class="widget">
+  <div class="filters-main widget">
     <div class="top-string">
       <div class="svg-price-wrap">
         <svg
@@ -16,56 +16,67 @@
         </svg>
       </div>
 
-      <div class="title">Data Spend</div>
+      <div class="title">Filters</div>
     </div>
-    <div class="bar">
-      <BarChart :chartData="data" :options="options" />
+    <div class="content">
+      <div class="section" v-for="(section, i) in data" :key="i">
+        <div class="header">{{ section.name }}</div>
+        <div class="items">
+          <div class="item" v-for="(item, i) in section.items" :key="i">
+            <label class="custom-checkbox">
+              <input
+                type="checkbox"
+                id="TopKeywords"
+                class="checkbox"
+                v-model="item.checkbox"
+              />
+              <span class="custom-box"></span>
+              {{ item.item }}
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { BarChart } from "vue-chart-3";
 import { ref } from "vue";
 
-const data = ref({
-  labels: [1, 2, 3, 1, 1, 1],
-  datasets: [
-    {
-      label: "Sales",
-      data: [40, 20, 30, 10, 14, 38, 20],
-      backgroundColor: "#FD9089",
-      borderRadius: 25,
-      borderSkipped: false,
-    },
-  ],
-});
-
-const options = ref({
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
+const data = ref([
+  {
+    name: "Popular Filters",
+    items: [
+      { item: "Top Keywords", checkbox: true },
+      { item: "Data Spend", checkbox: true },
+      { item: "Top Products", checkbox: true },
+      { item: "Quick Overview", checkbox: true },
+      { item: "Categories Trend", checkbox: true },
+      { item: "Revenue Trend", checkbox: true },
+      { item: "Gender", checkbox: true },
+      { item: "Age", checkbox: true },
+      { item: "Month", checkbox: true },
+      { item: "Day", checkbox: true },
+    ],
   },
-  scales: {
-    x: {
-      display: false,
-    },
-    y: {
-      display: false,
-    },
+  {
+    name: "Time",
+    items: [
+      { item: "Day", checkbox: true },
+      { item: "Week", checkbox: true },
+      { item: "2 weeks", checkbox: true },
+      { item: "Month", checkbox: true },
+    ],
   },
-});
+  {
+    name: "Delivery",
+    items: [
+      { item: "Age", checkbox: true },
+      { item: "Gender", checkbox: true },
+    ],
+  },
+]);
 </script>
 
-<style lang="scss">
-.widget .bar canvas {
-  width: 100% !important;
-  height: 150px !important;
-}
+<style scoped>
 </style>

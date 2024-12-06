@@ -29,11 +29,15 @@
         </svg>
       </div>
       <RouterLink to="/publishers">
-        <div class="item" :class="{ active: path == '/publisher' }">
+        <div class="item" :class="{ active: path == '/publishers' }">
           Publishers
         </div></RouterLink
       >
-      <div class="item">Open Source</div>
+      <RouterLink to="/open-source"
+        ><div class="item" :class="{ active: path == '/open-source' }">
+          Open Source
+        </div>
+      </RouterLink>
       <div
         class="item"
         @click="activeMenu = activeMenu == 'Ecommerce' ? '' : 'Ecommerce'"
@@ -53,7 +57,11 @@
           />
         </svg>
       </div>
-      <div class="item">Financials</div>
+      <RouterLink to="/financials"
+        ><div class="item" :class="{ active: path == '/financials' }">
+          Financials
+        </div>
+      </RouterLink>
     </div>
     <InternalDocument
       v-on-click-outside="() => (activeMenu = '')"
@@ -67,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import InternalDocument from "./InternalDocumentMenu.vue";
 import Ecommerce from "./EcommerceMenu.vue";
 import ClickOutside from "vue-click-outside";
@@ -77,7 +85,7 @@ import { vOnClickOutside } from "@vueuse/components";
 let activeMenu = ref("");
 
 const router = useRouter();
-const path = router.currentRoute.value.path;
+const path = computed(() => router.currentRoute.value.path);
 
 console.log(router, "router");
 </script>

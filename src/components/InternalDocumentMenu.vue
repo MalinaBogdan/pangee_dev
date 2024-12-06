@@ -48,7 +48,7 @@
       <div class="right">
         <div class="title">Campaign Name | Spring | 2024</div>
         <div class="filters">
-          <div class="item">Team</div>
+          <div class="item active">Team</div>
           <div class="item">Talent</div>
           <div class="item">Theme</div>
           <div class="item">Brand</div>
@@ -61,7 +61,7 @@
               <img src="../assets/images/artist1.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Adam</div>
+              <div class="name">Roger Federer</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />
@@ -75,7 +75,7 @@
               <img src="../assets/images/artist2.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Zampa</div>
+              <div class="name">Pharrell Williams</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />
@@ -89,7 +89,7 @@
               <img src="../assets/images/artist3.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Malika</div>
+              <div class="name">Amy Lieberwitz</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />
@@ -103,7 +103,7 @@
               <img src="../assets/images/artist4.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Short</div>
+              <div class="name">Raphael Nadal</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />
@@ -117,7 +117,7 @@
               <img src="../assets/images/artist5.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Crook</div>
+              <div class="name">James Jordan</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />
@@ -131,7 +131,7 @@
               <img src="../assets/images/artist6.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Junaid</div>
+              <div class="name">Amy Lee</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />
@@ -145,7 +145,7 @@
               <img src="../assets/images/artist7.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Michael</div>
+              <div class="name">Michael Vogal</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />

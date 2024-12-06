@@ -22,12 +22,12 @@
 
 <script setup>
 import { ref } from "vue";
-import EcoomerceImg1 from "../assets/images/ecommerce1.png";
-import EcoomerceImg2 from "../assets/images/ecommerce2.png";
-import EcoomerceImg3 from "../assets/images/ecommerce3.png";
-import EcoomerceImg4 from "../assets/images/ecommerce4.png";
-import EcoomerceImg5 from "../assets/images/ecommerce5.png";
-import EcoomerceImg6 from "../assets/images/ecommerce6.png";
+import EcoomerceImg1 from "@/assets/images/ecommerce1.png";
+import EcoomerceImg2 from "@/assets/images/ecommerce2.png";
+import EcoomerceImg3 from "@/assets/images/ecommerce3.png";
+import EcoomerceImg4 from "@/assets/images/ecommerce4.png";
+import EcoomerceImg5 from "@/assets/images/ecommerce5.png";
+import EcoomerceImg6 from "@/assets/images/ecommerce6.png";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
