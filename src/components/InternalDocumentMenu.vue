@@ -131,7 +131,10 @@
               <img src="../assets/images/artist6.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Amy Lee</div>
+              <div class="name">
+                Amy <br />
+                Lee
+              </div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />
