@@ -56,7 +56,7 @@ import RevenueTrends from "@/components/widgets/RevenueTrends.vue";
 
 let list = ref([
   { id: 2, component: TopKeywords },
-  { id: 2, component: DataSpend, props: { size: "small" } },
+  { id: 2, component: DataSpend, props: { size: "large" } },
 ]);
 
 let list2 = ref([

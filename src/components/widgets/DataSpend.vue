@@ -38,11 +38,17 @@ const props = defineProps({
 console.log(props.size, "props");
 
 const data = ref({
-  labels: [1, 2, 3, 1, 1, 1, 1, 1, 1, 1],
+  labels:
+    props.size == "small"
+      ? [1, 2, 3, 1, 1, 1, 1]
+      : [1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   datasets: [
     {
       label: "Sales",
-      data: [40, 20, 30, 10, 14, 38, 20, 35, 11, 28, 37],
+      data:
+        props.size == "small"
+          ? [40, 20, 30, 10, 14, 38, 20, 35]
+          : [40, 20, 30, 10, 14, 38, 20, 35, 27, 16, 34, 21, 26],
       backgroundColor: "#FD9089",
       borderRadius: 25,
       borderSkipped: false,
