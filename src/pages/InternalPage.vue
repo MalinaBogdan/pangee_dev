@@ -1,38 +1,12 @@
 <template>
-  <div class="financials">
-    <div class="financials-top">
-      <h4>Overall Potential Performance</h4>
-      <div class="right">
-        <div class="search">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
-            viewBox="0 0 13 13"
-            fill="none"
-          >
-            <path
-              d="M11.9168 11.9168L10.8335 10.8335M11.3752 6.22933C11.3752 9.07129 9.07129 11.3752 6.22933 11.3752C3.38736 11.3752 1.0835 9.07129 1.0835 6.22933C1.0835 3.38736 3.38736 1.0835 6.22933 1.0835C9.07129 1.0835 11.3752 3.38736 11.3752 6.22933Z"
-              stroke="#4C4C4C"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          <input type="text" placeholder="Search and Filter" />
-        </div>
-        <div class="calendar"></div>
-      </div>
+  <div class="internal">
+    <div class="internal-top">
+      <h4>Performance: Campaign Name | Spring | 2024</h4>
     </div>
     <div class="row">
       <FiltersMain />
       <div class="col-center">
-        <draggable
-          class="list-group"
-          :list="list"
-          group="people1"
-          @change="log"
-          itemKey="id"
-        >
+        <draggable class="list-group" :list="list" group="people1" itemKey="id">
           <template #item="{ element }">
             <div class="list-group-item">
               <component
@@ -50,7 +24,6 @@
           class="list-group"
           :list="list2"
           group="widget-side"
-          @change="log"
           itemKey="id"
         >
           <template #item="{ element }">
@@ -78,10 +51,12 @@ import DataSpend from "@/components/widgets/DataSpend.vue";
 import QuickOverView from "@/components/widgets/QuickOverView.vue";
 import CategoriesTrend from "@/components/widgets/CategoriesTrend.vue";
 import RevenueTrends from "@/components/widgets/RevenueTrends.vue";
+import TopProduct from "@/components/widgets/TopProduct.vue";
 
 let list = ref([
   { id: 2, component: TopKeywords },
   { id: 2, component: DataSpend, props: { size: "large" } },
+  { id: 2, component: TopProduct, props: { size: "large" } },
 ]);
 
 let list2 = ref([

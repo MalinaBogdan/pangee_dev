@@ -1,8 +1,13 @@
 <template>
   <div class="widget green">
     <div class="title">
-      Document <br />
-      Access
+      <p
+        :style="{ fontSize: props.title.fontSize + 'px' }"
+        v-for="(paragraph, i) in props.title.text"
+        :key="i"
+      >
+        {{ paragraph }}
+      </p>
     </div>
 
     <div class="grey-text mt40">Trending Internal documents</div>
@@ -181,11 +186,18 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import VueSlider from "vue-3-slider-component";
 
 const value = ref(60);
-// const data = ref([45, 51, 70, 65]);
+
+const props = defineProps({
+  title: {
+    type: Object,
+  },
+});
+
+console.log(props.title, "title");
 </script>
 
 <style lang="scss">

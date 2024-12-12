@@ -1,0 +1,18 @@
+.internal {
+    column-gap: 5px;
+
+    .internal-top {
+        display: flex;
+        width: 1410px;
+        margin: auto;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        h4 {
+            font-size: 24px;
+            text-align: start;
+            font-weight: 600;
+            margin: 0;
+        }
+    }
+}

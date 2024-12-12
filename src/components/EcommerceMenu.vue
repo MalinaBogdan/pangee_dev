@@ -33,7 +33,24 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const path = router.currentRoute.value.path;
 
-const colorArrow = path == "/publishers" ? "#e4ebe7" : "#eff8ef";
+let colorArrow = "";
+
+function selectColorArrow() {
+  if (
+    path === "/" ||
+    path === "/publishers" ||
+    path.includes("/internal") ||
+    path === "/open-source"
+  ) {
+    colorArrow = "#e6ede8";
+  } else if (path === "/financials") {
+    colorArrow = "#e4ebe7";
+  } else {
+    colorArrow = "";
+  }
+}
+
+selectColorArrow();
 
 const ecommerceData = ref([
   {

@@ -168,7 +168,12 @@
 
       <div class="sub-title">{{ subMenu.itemsName }}</div>
       <div class="sub-item" v-for="(subItem, i) in subMenu.items" :key="i">
-        {{ subItem }}
+        <RouterLink
+          :to="{ path: '/internal' + i }"
+          @click="store.openMenu = ''"
+        >
+          {{ subItem }}
+        </RouterLink>
       </div>
     </div>
 
@@ -180,10 +185,33 @@
 import { ref } from "vue";
 import Search from "./SearchElement.vue";
 import { vOnClickOutside } from "@vueuse/components";
+import { useRouter, RouterLink } from "vue-router";
+import { useStore } from "@/store";
+
+const store = useStore();
+
+const router = useRouter();
+const path = router.currentRoute.value.path;
 
 const toggleData = ref(false);
 const subMenu = ref({});
 const showSearch = ref(false);
+
+let colorArrow = "";
+
+function selectColorArrow() {
+  if (path === "/" || path === "/publishers" || path.includes("/internal")) {
+    colorArrow = "#e6ede8";
+  } else if (path === "/open-source") {
+    colorArrow = "#d1e0e2";
+  } else if (path === "/financials") {
+    colorArrow = "#e4ebe7";
+  } else {
+    colorArrow = "";
+  }
+}
+
+selectColorArrow();
 
 const menu = ref([
   {
@@ -222,16 +250,6 @@ const menu = ref([
   },
   {
     title: "Media",
-    itemsName: "Media Name",
-    items: [
-      "Vogue",
-      "Elle",
-      "Conde Nast",
-      "Versace",
-      "Gucci",
-      "Parada",
-      "Channel",
-    ],
   },
 ]);
 </script>
@@ -248,6 +266,6 @@ const menu = ref([
   transform: rotate(315deg);
   border-top: 1px solid white;
   border-right: 1px solid white;
-  background-color: #e6ede8;
+  background-color: v-bind(colorArrow);
 }
 </style>

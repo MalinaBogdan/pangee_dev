@@ -1,7 +1,23 @@
 .financials {
-    display: flex;
+    .financials-top {
+        display: flex;
+        justify-content: space-between;
+        width: 1410px;
+        margin: auto;
 
-    column-gap: 5px;
+        .search {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            column-gap: 20px;
+            height: 33px;
+            border-radius: 16px;
+            background: #eef3ef;
 
-    justify-content: center;
+            input {
+                border: none;
+                background-color: #ffffff00;
+            }
+        }
+    }
 }

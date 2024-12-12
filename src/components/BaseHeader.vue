@@ -9,10 +9,10 @@
       <div
         class="item"
         @click="
-          activeMenu =
-            activeMenu == 'InternalDocument' ? '' : 'InternalDocument'
+          store.openMenu =
+            store.openMenu == 'InternalDocument' ? '' : 'InternalDocument'
         "
-        :class="{ active: activeMenu == 'InternalDocument' }"
+        :class="{ active: store.openMenu == 'InternalDocument' }"
       >
         Internal Document
         <svg
@@ -40,8 +40,10 @@
       </RouterLink>
       <div
         class="item"
-        @click="activeMenu = activeMenu == 'Ecommerce' ? '' : 'Ecommerce'"
-        :class="{ active: activeMenu == 'Ecommerce' }"
+        @click="
+          store.openMenu = store.openMenu == 'Ecommerce' ? '' : 'Ecommerce'
+        "
+        :class="{ active: store.openMenu == 'Ecommerce' }"
       >
         Ecommerce
         <svg
@@ -64,30 +66,31 @@
       </RouterLink>
     </div>
     <InternalDocument
-      v-on-click-outside="() => (activeMenu = '')"
-      v-if="activeMenu == 'InternalDocument'"
+      v-on-click-outside="() => (store.openMenu = '')"
+      v-if="store.openMenu == 'InternalDocument'"
     />
     <Ecommerce
-      v-on-click-outside="() => (activeMenu = '')"
-      v-if="activeMenu == 'Ecommerce'"
+      v-on-click-outside="() => (store.openMenu = '')"
+      v-if="store.openMenu == 'Ecommerce'"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import InternalDocument from "./InternalDocumentMenu.vue";
 import Ecommerce from "./EcommerceMenu.vue";
 import ClickOutside from "vue-click-outside";
 import { useRouter, RouterLink } from "vue-router";
 import { vOnClickOutside } from "@vueuse/components";
+import { useStore } from "@/store";
 
-let activeMenu = ref("");
+const store = useStore();
+
+console.log(store.openMenu, "store");
 
 const router = useRouter();
 const path = computed(() => router.currentRoute.value.path);
-
-console.log(router, "router");
 </script>
 
 <script>

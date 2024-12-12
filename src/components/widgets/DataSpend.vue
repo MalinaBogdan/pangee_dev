@@ -19,14 +19,43 @@
       <div class="title">Data Spend</div>
     </div>
     <div class="bar">
-      <BarChart :chartData="data" :options="options" />
+      <BarChart
+        :chartData="data"
+        :options="options"
+        :plugins="[customLabelsPlugin]"
+      />
+      <BarChart
+        class="barchart-second"
+        :chartData="data2"
+        :options="options"
+        :plugins="[customLabelsPlugin2]"
+      />
+    </div>
+    <div class="labels">
+      <div
+        class="label"
+        v-for="(label, i) in props.size == 'small'
+          ? dataSmall.lebels
+          : datMedium.lebels"
+        :key="i"
+      >
+        {{ label }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { BarChart } from "vue-chart-3";
 import { ref, defineProps } from "vue";
+import { BarChart } from "vue-chart-3";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+ChartJS.register(BarElement, CategoryScale, LinearScale);
 
 const props = defineProps({
   size: {
@@ -35,20 +64,116 @@ const props = defineProps({
   },
 });
 
-console.log(props.size, "props");
+const dataSmall = {
+  lebels: ["1/3", "2/4", "1/4", "3/4", "2/2 ", "2/3", "2/4"],
+  data: [40, 20, 30, 21, 14, 38, 20, 35],
+};
+
+const datMedium = {
+  lebels: [
+    "1/3",
+    "2/4",
+    "1/4",
+    "3/4",
+    "2/2 ",
+    "2/3",
+    "2/4",
+    "1/3",
+    "2/4",
+    "1/4",
+    "3/4",
+    "2/2 ",
+    "2/3",
+  ],
+  data: [40, 20, 30, 21, 14, 38, 20, 35, 27, 16, 34, 21, 26],
+};
+
+const customLabelsPlugin = {
+  id: "customLabels",
+  afterDatasetsDraw(chart) {
+    const ctx = chart.ctx;
+
+    chart.data.datasets.forEach((dataset, datasetIndex) => {
+      const meta = chart.getDatasetMeta(datasetIndex);
+
+      meta.data.forEach((bar, index) => {
+        const value = dataset.data[index];
+        const { x, y } = bar.tooltipPosition();
+        let barHeight;
+
+        if (typeof bar.base === "undefined") {
+          const yScale = chart.scales.y || {};
+          const yBase = yScale.bottom || chart.height;
+          barHeight = yBase - y;
+        } else {
+          barHeight = bar.base - y;
+        }
+
+        ctx.save();
+        ctx.font = "10px";
+        ctx.fillStyle = "#000";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(value, x, y + barHeight / 4);
+        ctx.restore();
+      });
+    });
+  },
+};
+
+const customLabelsPlugin2 = {
+  id: "customLabels",
+  afterDatasetsDraw(chart) {
+    const ctx = chart.ctx;
+
+    chart.data.datasets.forEach((dataset, datasetIndex) => {
+      const meta = chart.getDatasetMeta(datasetIndex);
+
+      meta.data.forEach((bar, index) => {
+        const value = dataset.data[index];
+        const { x, y } = bar.tooltipPosition();
+        let barHeight;
+
+        if (typeof bar.base === "undefined") {
+          const yScale = chart.scales.y || {};
+          const yBase = yScale.bottom || chart.height;
+          barHeight = yBase - y;
+        } else {
+          barHeight = bar.base - y;
+        }
+
+        ctx.save();
+        ctx.font = "10px";
+        ctx.fillStyle = "#000";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(value, x, y + barHeight / 2);
+        ctx.restore();
+      });
+    });
+  },
+};
 
 const data = ref({
-  labels:
-    props.size == "small"
-      ? [1, 2, 3, 1, 1, 1, 1]
-      : [1, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  labels: props.size == "small" ? dataSmall.lebels : datMedium.lebels,
   datasets: [
     {
       label: "Sales",
-      data:
-        props.size == "small"
-          ? [40, 20, 30, 10, 14, 38, 20, 35]
-          : [40, 20, 30, 10, 14, 38, 20, 35, 27, 16, 34, 21, 26],
+      data: props.size == "small" ? dataSmall.data : datMedium.data,
+      backgroundColor: "#6AD2FF",
+      borderRadius: 25,
+      borderSkipped: false,
+      barThickness: 30,
+    },
+  ],
+});
+
+const data2 = ref({
+  labels: props.size == "small" ? dataSmall.lebels : datMedium.lebels,
+  datasets: [
+    {
+      label: "Sales2",
+      data: props.size == "small" ? dataSmall.data : datMedium.data,
       backgroundColor: "#FD9089",
       borderRadius: 25,
       borderSkipped: false,
@@ -61,6 +186,7 @@ const options = ref({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
+    customLabels: {},
     legend: {
       display: false,
     },
@@ -80,8 +206,27 @@ const options = ref({
 </script>
 
 <style lang="scss">
-.widget .bar canvas {
-  width: 100% !important;
-  height: 150px !important;
+.widget .bar {
+  margin-top: 20px;
+  height: 150px;
+  position: relative;
+
+  canvas {
+    width: 100% !important;
+    height: 150px !important;
+  }
+}
+.barchart-second {
+  position: absolute !important;
+  bottom: 0%;
+  width: 100%;
+  height: 75px !important;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  font-size: 10px;
 }
 </style>

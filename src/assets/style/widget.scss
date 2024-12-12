@@ -30,12 +30,6 @@
         column-gap: 10px;
     }
 
-    .bar {
-        margin-top: 20px;
-        height: 150px;
-        position: relative;
-    }
-
     .grey-text {
         color: #a7aaa7;
         font-size: 14px;
@@ -155,8 +149,8 @@
         padding: 26px;
         padding-bottom: 30px;
 
-        .title {
-            font-size: 36px;
+        .title p {
+            margin: 0;
         }
 
         .grey-text {
@@ -210,6 +204,7 @@
         .labels {
             display: flex;
             flex-wrap: wrap;
+            justify-content: flex-start;
             row-gap: 25px;
             margin-top: 40px;
             border-radius: 15px;

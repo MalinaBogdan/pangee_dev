@@ -87,7 +87,11 @@ let list1 = ref([
 ]);
 
 let list2 = ref([
-  { id: 1, component: DocumentAccess },
+  {
+    id: 1,
+    component: DocumentAccess,
+    props: { title: { text: [" Document", "Access"], fontSize: "36" } },
+  },
   { id: 2, component: TopKeywords },
 ]);
 
