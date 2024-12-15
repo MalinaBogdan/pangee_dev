@@ -5,7 +5,12 @@
       <div class="item" v-for="(item, i) in ecommerceData" :key="i">
         <div class="title">{{ item.title }}</div>
         <div class="name" v-for="(name, i) in item.items" :key="i">
-          {{ name }}
+          <RouterLink
+            :to="{ path: '/ecommerce' + i }"
+            @click="store.openMenu = ''"
+          >
+            {{ name }}
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -29,9 +34,12 @@ import EcoomerceImg4 from "@/assets/images/ecommerce4.png";
 import EcoomerceImg5 from "@/assets/images/ecommerce5.png";
 import EcoomerceImg6 from "@/assets/images/ecommerce6.png";
 import { useRouter } from "vue-router";
+import { useStore } from "@/store";
 
 const router = useRouter();
 const path = router.currentRoute.value.path;
+
+const store = useStore();
 
 let colorArrow = "";
 

@@ -5,6 +5,7 @@ import PublishersPage from "./pages/PublishersPage.vue";
 import OpenSource from "./pages/OpenSource.vue";
 import FinancialsPage from "./pages/FinancialsPage.vue";
 import InternalPage from "./pages/InternalPage.vue";
+import EcommercePage from "./pages/EcommercePage.vue";
 
 const routes = [
   { path: "/", component: GridLayout },
@@ -14,6 +15,11 @@ const routes = [
   {
     path: "/internal:id",
     component: InternalPage,
+    props: true,
+  },
+  {
+    path: "/ecommerce:id",
+    component: EcommercePage,
     props: true,
   },
 ];

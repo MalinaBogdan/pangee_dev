@@ -14,5 +14,65 @@
             font-weight: 600;
             margin: 0;
         }
+
+        .right {
+            display: flex;
+            column-gap: 20px;
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            column-gap: 20px;
+            height: 33px;
+            border-radius: 16px;
+            background: #eef3ef;
+
+            input {
+                border: none;
+                background-color: #ffffff00;
+            }
+        }
+
+        .calendar-wrap {
+            position: relative;
+
+            .calendar {
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+                padding: 0 10px;
+                height: 33px;
+                border-radius: 16px;
+                background: #eef3ef;
+
+                p {
+                    font-size: 12px;
+                    margin: 0 30px 0 0;
+                }
+            }
+
+            .date-picker-wrap {
+                position: absolute;
+                width: 350px;
+                left: calc(50% - 175px);
+            }
+
+            .vc-pane {
+                background: white;
+                z-index: 10;
+                width: 350px;
+                border-radius: 20px;
+                -webkit-box-shadow: 0px 0px 28px -14px rgba(0, 0, 0, 0.75);
+                -moz-box-shadow: 0px 0px 28px -14px rgba(0, 0, 0, 0.75);
+                box-shadow: 0px 20px 50px -20px rgba(0, 0, 0, 0.75);
+
+                .vc-highlight {
+                    background-color: #6ad2ff !important;
+                    border-radius: 50%;
+                }
+            }
+        }
     }
 }
