@@ -89,7 +89,7 @@
               <img src="../assets/images/artist3.png" alt="" />
             </div>
             <div class="checkbox-wrap">
-              <div class="name">Amy Lieberwitz</div>
+              <div class="name">Annie Lieberwitz</div>
               <div class="toggle-container">
                 <label class="switch">
                   <input type="checkbox" v-model="toggleData" />

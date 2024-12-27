@@ -3,17 +3,20 @@
     <BaseHeader />
     <RouterView />
   </div>
+  <ChatIcon />
 </template>
 
 <script>
 import BaseHeader from "./components/BaseHeader.vue";
 import { RouterView } from "vue-router";
+import ChatIcon from "@/components/chat/chatIcon.vue";
 
 export default {
   name: "App",
   components: {
     RouterView,
     BaseHeader,
+    ChatIcon,
   },
 };
 </script>

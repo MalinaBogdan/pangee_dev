@@ -16,7 +16,7 @@
         </svg>
       </div>
 
-      <div class="title">Data Spend</div>
+      <div class="title">Revenue vs Data Spend</div>
     </div>
     <div class="bar">
       <BarChart

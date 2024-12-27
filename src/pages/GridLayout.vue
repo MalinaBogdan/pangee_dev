@@ -81,7 +81,6 @@ import RevenueTrends from "@/components/widgets/RevenueTrends.vue";
 
 let list1 = ref([
   { id: 1, component: EcommerceSales },
-  { id: 2, component: DataSpend, props: { size: "small" } },
   { id: 3, component: AmountSpend },
   { id: 4, component: TopProduct },
 ]);
@@ -92,7 +91,8 @@ let list2 = ref([
     component: DocumentAccess,
     props: { title: { text: [" Document", "Access"], fontSize: "36" } },
   },
-  { id: 2, component: TopKeywords },
+  { id: 2, component: DataSpend, props: { size: "large" } },
+  { id: 3, component: TopKeywords },
 ]);
 
 let list3 = ref([
