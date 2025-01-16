@@ -10,194 +10,61 @@
       </p>
     </div>
 
-    <div class="grey-text mt40">Trending Internal documents</div>
-
-    <div class="row">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5M8 13H12M8 17H16M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-
-      <p>Document name</p>
-      <div class="slider-container">
-        <VueSlider
-          v-model="value"
-          :tooltips="true"
-          tooltip="always"
-          :tooltipFormatter="() => `${value}%`"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5M8 13H12M8 17H16M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-
-      <p>Document name</p>
-      <div class="slider-container">
-        <VueSlider
-          v-model="value"
-          :tooltips="true"
-          tooltip="always"
-          :tooltipFormatter="() => `${value}%`"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5M8 13H12M8 17H16M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-
-      <p>Document name</p>
-      <div class="slider-container">
-        <VueSlider
-          v-model="value"
-          :tooltips="true"
-          tooltip="always"
-          :tooltipFormatter="() => `${value}%`"
-        />
-      </div>
-    </div>
-    <div class="grey-text mt20">Trending Internal documents</div>
-    <div class="row">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5M8 13H12M8 17H16M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-
-      <p>Document name</p>
-      <div class="slider-container">
-        <VueSlider
-          v-model="value"
-          :tooltips="true"
-          tooltip="always"
-          :tooltipFormatter="() => `${value}%`"
-        />
-      </div>
+    <div v-if="store.showLoader">
+      <Loader />
     </div>
 
-    <div class="row">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5M8 13H12M8 17H16M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+    <div v-else v-for="(section, i) in props.data.sections" :key="i">
+      <div class="grey-text mt40">{{ section.title }}</div>
 
-      <p>Document name</p>
-      <div class="slider-container">
-        <VueSlider
-          v-model="value"
-          :tooltips="true"
-          tooltip="always"
-          :tooltipFormatter="() => `${value}%`"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <path
-          d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5M8 13H12M8 17H16M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
-          stroke="#292D32"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <div class="row" v-for="(doc, i) in section.documents" :key="i">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5M8 13H12M8 17H16M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z"
+            stroke="#292D32"
+            stroke-width="1.5"
+            stroke-miterlimit="10"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
 
-      <p>Document name</p>
-      <div class="slider-container">
-        <VueSlider
-          v-model="value"
-          :tooltips="true"
-          tooltip="always"
-          :tooltipFormatter="() => `${value}%`"
-        />
+        <p>{{ doc.title }}</p>
+        <div class="slider-container">
+          <VueSlider
+            v-model="doc.value"
+            :tooltips="true"
+            tooltip="always"
+            :tooltipFormatter="() => `${doc.value}%`"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
+import { defineProps } from "vue";
 import VueSlider from "vue-3-slider-component";
-
-const value = ref(60);
+import Loader from "@/components/LoaderWidget.vue";
+import { useStore } from "@/store";
 
 const props = defineProps({
   title: {
     type: Object,
   },
+  data: {
+    type: Array,
+  },
 });
 
-console.log(props.title, "title");
+const store = useStore();
 </script>
 
 <style lang="scss">

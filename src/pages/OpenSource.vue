@@ -96,7 +96,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, inject, onMounted } from "vue";
 import FiltersDoc from "@/components/FiltersDoc.vue";
 import draggable from "vuedraggable";
 
@@ -104,19 +104,76 @@ import QuickOverView from "@/components/widgets/QuickOverView.vue";
 import CategoriesTrend from "@/components/widgets/CategoriesTrend.vue";
 import DocumentAccess from "@/components/widgets/DocumentAccess.vue";
 
+const axios = inject("axios");
+let widgets = ref({});
+let ecommerceSalesData = ref({});
+let documentAccessData = ref({});
+let quickOverviewData = ref({});
+let amountSpendData = ref({});
+let categoriesTrendData = ref({});
+let topProductsData = ref({});
+let revenueDataSpendData = ref({});
+let revenueTrendsData = ref({});
+let topKeywordsData = ref({});
+
+onMounted(async () => {
+  axios.get("/api/dashboard/2c1d233b-5aad-465c-82c8-6921067ae368").then((data) => {
+    widgets.value = data.data.widgets;
+
+    widgets.value.forEach((element) => {
+      switch (element.type) {
+        case "ecommerce-sales":
+          ecommerceSalesData.value = element.data;
+          break;
+        case "document-access":
+          documentAccessData.value = element.data;
+          break;
+        case "quick-overview":
+          quickOverviewData.value = element.data;
+          break;
+        case "amount-spend":
+          amountSpendData.value = element.data;
+          break;
+        case "categories-trend":
+          categoriesTrendData.value = element.data;
+          break;
+        case "top-products":
+          topProductsData.value = element.data;
+          break;
+        case "revenue-vs-data-spend":
+          revenueDataSpendData.value = element.data;
+          break;
+        case "revenue-trends":
+          revenueTrendsData.value = element.data;
+          break;
+        case "top-keywords":
+          topKeywordsData.value = element.data;
+          break;
+
+        default:
+          break;
+      }
+    });
+
+    console.log(data, "data");
+  });
+});
+
 let list = ref([
   {
     id: 2,
     component: DocumentAccess,
-    props: { title: { text: ["Current Documents & Uses"], fontSize: "24" } },
+    props: {
+      title: { text: ["Current Documents & Uses"], fontSize: "24" },
+      data: documentAccessData,
+    },
   },
 ]);
 
 let list2 = ref([
-  { id: 5, component: QuickOverView },
-  { id: 6, component: CategoriesTrend },
+  { id: 5, component: QuickOverView, props: { data: quickOverviewData } },
+  { id: 6, component: CategoriesTrend, props: { data: categoriesTrendData } },
 ]);
 </script>
 
-<style>
-</style>
+<style></style>

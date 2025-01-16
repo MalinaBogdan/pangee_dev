@@ -1,19 +1,26 @@
 <template>
   <div class="widget revenue">
     <div class="title">Revenue Trends</div>
-    <LineChart
-      :chartData="chartData"
-      :options="options"
-      ref="lineChartRef"
-      style="height: 255px"
-    />
-    <div class="tooltip-container" ref="tooltipContainer"></div>
-    <div class="background-revenue"></div>
+
+    <div v-if="store.showLoader">
+      <Loader />
+    </div>
+    <div v-else>
+      <LineChart
+        :chartData="chartData"
+        :options="options"
+        ref="lineChartRef"
+        style="height: 255px"
+      />
+      <div class="tooltip-container" ref="tooltipContainer"></div>
+
+      <div class="background-revenue"></div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
+import { ref, defineProps, watchEffect } from "vue";
 import { LineChart } from "vue-chart-3";
 import {
   Chart,
@@ -24,27 +31,23 @@ import {
   Legend,
   Title,
 } from "chart.js";
+import { useStore } from "@/store";
+import Loader from "@/components/LoaderWidget.vue";
+
+const props = defineProps({
+  data: {
+    type: Object,
+  },
+});
+
+const store = useStore();
 
 Chart.register(LineElement, CategoryScale, LinearScale, Tooltip, Legend, Title);
 
 const tooltipContainer = ref(null);
 const lineChartRef = ref(null);
 
-const chartData = ref({
-  labels: ["January", "February", "March", "April", "May"],
-  datasets: [
-    {
-      label: "Data",
-      data: [170, 250, 358, 437, 554],
-      borderColor: "#000",
-      backgroundColor: "#000",
-      borderWidth: 2,
-      fill: false,
-      pointRadius: 0,
-    },
-  ],
-});
-
+const chartData = ref({});
 const options = ref({
   responsive: true,
   maintainAspectRatio: false,
@@ -69,6 +72,41 @@ const options = ref({
   },
 });
 
+watchEffect(() => {
+  if (props.data && props.data.length > 0) {
+    chartData.value = {
+      labels: props.data.map((item) => item.title),
+      datasets: [
+        {
+          label: "Data",
+          data: props.data.map((item) => item.value),
+          borderColor: "#000",
+          backgroundColor: "#000",
+          borderWidth: 2,
+          fill: false,
+          pointRadius: 0,
+        },
+      ],
+    };
+
+    setTimeout(() => {
+      if (lineChartRef.value) {
+        customTooltipHandler();
+      }
+    }, 500);
+  }
+});
+
+const colors = [
+  "#2670AF",
+  "#6AD2FF",
+  "#7093CB",
+  "#E5ADB8",
+  "#FFE53D",
+  "#ACEA85",
+  "#FD9089",
+];
+
 function customTooltipHandler() {
   const tooltipEl = tooltipContainer.value;
   if (!tooltipEl || !lineChartRef.value) return;
@@ -85,28 +123,24 @@ function customTooltipHandler() {
 
   dataset.data.forEach((value, index) => {
     const position = meta.data[index].tooltipPosition();
+
     if (!position) return;
 
     const tooltipDiv = document.createElement("div");
     tooltipDiv.classList.add("chart-tooltip");
 
     tooltipDiv.style.left = `${position.x + 15}px`;
-    tooltipDiv.style.top = `${position.y + 10}px`;
-
+    tooltipDiv.style.top = `${position.y - value / 30 + 70}px`;
     tooltipDiv.style.position = "absolute";
+
+    const tooltipColor = colors[index];
+    tooltipDiv.style.backgroundColor = tooltipColor;
+
     tooltipDiv.innerHTML = value;
+
     tooltipEl.appendChild(tooltipDiv);
   });
 }
-
-onMounted(async () => {
-  await nextTick();
-  setTimeout(() => {
-    if (lineChartRef.value) {
-      customTooltipHandler();
-    }
-  }, 300);
-});
 </script>
 
 <style lang="scss">

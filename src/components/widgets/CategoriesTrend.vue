@@ -1,26 +1,41 @@
 <template>
   <div class="widget pie">
     <div class="title">Categories Trend</div>
-
-    <div class="pie-chart">
-      <PieChart :chartData="chartData" :options="chartOptions" />
+    <div v-if="store.showLoader">
+      <Loader />
     </div>
 
-    <div class="labels">
-      <div class="label" v-for="(label, i) in labels" :key="i">
-        <div class="top">
-          <div class="color" :style="{ backgroundColor: colors[i] }"></div>
-          <div class="name">{{ label.label }}</div>
+    <div v-else>
+      <div class="pie-chart">
+        <PieChart :chartData="chartData" :options="chartOptions" />
+      </div>
+
+      <div class="labels">
+        <div class="label" v-for="(label, i) in props.data" :key="i">
+          <div class="top">
+            <div class="color" :style="{ backgroundColor: colors[i] }"></div>
+            <div class="name">{{ label.title }}</div>
+          </div>
+          <div class="percent">{{ label.value }}%</div>
         </div>
-        <div class="percent">{{ label.percent }}%</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps, watchEffect } from "vue";
 import { PieChart } from "vue-chart-3";
+import { useStore } from "@/store";
+import Loader from "@/components/LoaderWidget.vue";
+
+const props = defineProps({
+  data: {
+    type: Array,
+  },
+});
+
+const store = useStore();
 
 const colors = [
   "#2670AF",
@@ -32,25 +47,30 @@ const colors = [
   "#FD9089",
 ];
 
-const labels = [
-  { label: "Women", percent: 10 },
-  { label: "Men", percent: 34 },
-  { label: "Acessories", percent: 42 },
-  { label: "Beauty", percent: 16 },
-  { label: "Home", percent: 22 },
-  { label: "Jewelry", percent: 5 },
-  { label: "Shoes", percent: 29 },
-];
-
 const chartData = ref({
-  labels: labels.map((a) => a.label),
+  labels: [],
   datasets: [
     {
-      data: labels.map((a) => a.percent),
+      data: [],
       backgroundColor: colors,
       borderWidth: 0,
     },
   ],
+});
+
+watchEffect(() => {
+  if (props.data && props.data.length > 0) {
+    chartData.value = {
+      labels: props.data.map((item) => item.title),
+      datasets: [
+        {
+          data: props.data.map((item) => item.value),
+          backgroundColor: colors.slice(0, props.data.length),
+          borderWidth: 0,
+        },
+      ],
+    };
+  }
 });
 
 const chartOptions = ref({

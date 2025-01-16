@@ -66,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, inject, onMounted } from "vue";
 import draggable from "vuedraggable";
 
 import EcommerceSales from "@/components/widgets/EcommerceSales.vue";
@@ -79,26 +79,89 @@ import QuickOverView from "@/components/widgets/QuickOverView.vue";
 import CategoriesTrend from "@/components/widgets/CategoriesTrend.vue";
 import RevenueTrends from "@/components/widgets/RevenueTrends.vue";
 
+import { useStore } from "@/store";
+
+const axios = inject("axios");
+const store = useStore();
+
+let widgets = ref({});
+let ecommerceSalesData = ref({});
+let documentAccessData = ref({});
+let quickOverviewData = ref({});
+let amountSpendData = ref({});
+let categoriesTrendData = ref({});
+let topProductsData = ref({});
+let revenueDataSpendData = ref({});
+let revenueTrendsData = ref({});
+let topKeywordsData = ref({});
+
+onMounted(async () => {
+  store.showLoader = true;
+  axios.get("/api/dashboard/2c1d233b-5aad-465c-82c8-6921067ae368").then((data) => {
+    widgets.value = data.data.widgets;
+
+    widgets.value.forEach((element) => {
+      switch (element.type) {
+        case "ecommerce-sales":
+          ecommerceSalesData.value = element.data;
+          break;
+        case "document-access":
+          documentAccessData.value = element.data;
+          break;
+        case "quick-overview":
+          quickOverviewData.value = element.data;
+          break;
+        case "amount-spend":
+          amountSpendData.value = element.data;
+          break;
+        case "categories-trend":
+          categoriesTrendData.value = element.data;
+          break;
+        case "top-products":
+          topProductsData.value = element.data;
+          break;
+        case "revenue-vs-data-spend":
+          revenueDataSpendData.value = element.data;
+          break;
+        case "revenue-trends":
+          revenueTrendsData.value = element.data;
+          break;
+        case "top-keywords":
+          topKeywordsData.value = element.data;
+          break;
+
+        default:
+          break;
+      }
+    });
+
+    store.showLoader = false;
+  });
+});
+
 let list1 = ref([
-  { id: 1, component: EcommerceSales },
-  { id: 3, component: AmountSpend },
-  { id: 4, component: TopProduct },
+  { id: 1, component: EcommerceSales, props: { data: ecommerceSalesData } },
+  { id: 3, component: AmountSpend, props: { data: amountSpendData } },
+  { id: 4, component: TopProduct, props: { data: topProductsData } },
 ]);
 
 let list2 = ref([
   {
     id: 1,
     component: DocumentAccess,
-    props: { title: { text: [" Document", "Access"], fontSize: "36" } },
+    props: {
+      title: { text: [" Document", "Access"], fontSize: "36" },
+      data: documentAccessData,
+    },
   },
-  { id: 2, component: DataSpend, props: { size: "large" } },
-  { id: 3, component: TopKeywords },
+  { id: 2, component: DataSpend, props: { data: revenueDataSpendData } },
+  { id: 3, component: TopKeywords, props: { data: topKeywordsData } },
 ]);
 
 let list3 = ref([
-  { id: 5, component: QuickOverView },
-  { id: 6, component: CategoriesTrend },
-  { id: 7, component: RevenueTrends },
+  { id: 5, component: QuickOverView, props: { data: quickOverviewData } },
+  { id: 6, component: CategoriesTrend, props: { data: categoriesTrendData } },
+  { id: 7, component: RevenueTrends, props: { data: revenueTrendsData } },
 ]);
 </script>
 

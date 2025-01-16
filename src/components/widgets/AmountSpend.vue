@@ -18,35 +18,42 @@
 
       <div class="title">Amount Spend</div>
     </div>
-    <div class="table">
+
+    <div v-if="store.showLoader">
+      <Loader />
+    </div>
+    <div v-else class="table">
       <div class="top">
         <div class="grey-text">Publishers Name</div>
         <div class="grey-text">Amount Spend</div>
       </div>
 
       <div class="separator"></div>
-      <div class="row" v-for="(item, i) in data" :key="i">
-        <p>{{ item.name }}</p>
-        <p>{{ item.price }}</p>
+      <div class="row" v-for="(item, i) in props.data.publishers" :key="i">
+        <p>{{ item.title }}</p>
+        <p>{{ item.value }}</p>
       </div>
       <div class="separator"></div>
     </div>
     <div class="bottom-amount">
       <div class="grey-text">Total Amount Spend</div>
-      <div class="text-price">$574.34</div>
+      <div class="text-price">{{ props.data.total }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { defineProps } from "vue";
+import { useStore } from "@/store";
+import Loader from "@/components/LoaderWidget.vue";
 
-const data = ref([
-  { name: "Publisher 1", price: "$12.35" },
-  { name: "Publisher 1", price: "$12.35" },
-  { name: "Publisher 1", price: "$12.35" },
-  { name: "Publisher 1", price: "$12.35" },
-]);
+const props = defineProps({
+  data: {
+    type: Object,
+  },
+});
+
+const store = useStore();
 </script>
 
 <style lang="scss"></style>

@@ -23,6 +23,7 @@
     "v-calendar": "^3.1.2",
     "vue": "^3.2.13",
     "vue-3-slider-component": "^1.0.1",
+    "vue-axios": "^3.5.2",
     "vue-calendar-3": "^2.6.6",
     "vue-chart-3": "^3.1.8",
     "vue-click-outside": "^1.1.0",

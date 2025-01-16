@@ -1,28 +1,31 @@
 <template>
   <div class="widget">
     <div class="title">Top Keywords</div>
-    <div class="list">
+    <div v-if="store.showLoader">
+      <Loader />
+    </div>
+    <div v-else class="list">
       <div class="name">
         <div class="header">Keyword name</div>
-        <div class="value" v-for="(list, i) in lists" :key="i">
-          {{ list.name }}
+        <div class="value" v-for="(list, i) in dataLeft" :key="i">
+          {{ list.title }}
         </div>
       </div>
       <div class="volume">
         <div class="header">Volume</div>
-        <div class="value" v-for="(list, i) in lists" :key="i">
-          {{ list.volumeName }}
+        <div class="value" v-for="(list, i) in dataLeft" :key="i">
+          {{ list.volume }}
         </div>
       </div>
       <div class="keywords">
-        <div class="header">Keywords</div>
-        <div class="value" v-for="(list, i) in lists" :key="i">
-          {{ list.keyword }}
+        <div class="header">Keywords name</div>
+        <div class="value" v-for="(list, i) in dataRight" :key="i">
+          {{ list.title }}
         </div>
       </div>
       <div class="volume">
         <div class="header">Volume</div>
-        <div class="value" v-for="(list, i) in lists" :key="i">
+        <div class="value" v-for="(list, i) in dataRight" :key="i">
           {{ list.volume }}
         </div>
       </div>
@@ -31,15 +34,29 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps, watchEffect } from "vue";
+import { useStore } from "@/store";
+import Loader from "@/components/LoaderWidget.vue";
 
-const lists = ref([
-  { name: "Bags", volumeName: "432", keyword: "Formal Suit", volume: "12" },
-  { name: "Lady Shoes", volumeName: "432", keyword: "Dressing", volume: "12" },
-  { name: "Gucci Bag", volumeName: "432", keyword: "Clothing", volume: "12" },
-  { name: "Belt", volumeName: "432", keyword: "Leather bag", volume: "12" },
-  { name: "Armani Shirt", volumeName: "432", keyword: "258", volume: "12" },
-]);
+const props = defineProps({
+  data: {
+    type: Object,
+  },
+});
+
+const store = useStore();
+
+const dataLeft = ref();
+const dataRight = ref();
+
+watchEffect(() => {
+  if (props.data && props.data.length > 0) {
+    const middleIndex = Math.ceil(props.data.length / 2);
+
+    dataLeft.value = props.data.slice(0, middleIndex);
+    dataRight.value = props.data.slice(middleIndex);
+  }
+});
 </script>
 
 <style lang="scss"></style>

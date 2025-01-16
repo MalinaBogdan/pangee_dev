@@ -18,75 +18,45 @@
 
       <div class="title">Revenue vs Data Spend</div>
     </div>
-    <div class="bar">
-      <BarChart
-        :chartData="data"
-        :options="options"
-        :plugins="[customLabelsPlugin]"
-      />
-      <BarChart
-        class="barchart-second"
-        :chartData="data2"
-        :options="options"
-        :plugins="[customLabelsPlugin2]"
-      />
+
+    <div v-if="store.showLoader">
+      <Loader />
     </div>
-    <div class="labels">
-      <div
-        class="label"
-        v-for="(label, i) in props.size == 'small'
-          ? dataSmall.lebels
-          : datMedium.lebels"
-        :key="i"
-      >
-        {{ label }}
+    <div v-else>
+      <div class="bar">
+        <BarChart :chartData="data" :options="options" :plugins="[customLabelsPlugin]" />
+        <BarChart
+          class="barchart-second"
+          :chartData="data2"
+          :options="options"
+          :plugins="[customLabelsPlugin2]"
+        />
+      </div>
+      <div class="labels">
+        <div class="label" v-for="(label, i) in props.data" :key="i">
+          {{ label.title }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref, defineProps, watchEffect } from "vue";
 import { BarChart } from "vue-chart-3";
-import {
-  Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale } from "chart.js";
+import { useStore } from "@/store";
+import Loader from "@/components/LoaderWidget.vue";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale);
 
 const props = defineProps({
-  size: {
-    type: String,
-    default: "medium",
+  data: {
+    type: Array,
   },
 });
 
-const dataSmall = {
-  lebels: ["1/3", "2/4", "1/4", "3/4", "2/2 ", "2/3", "2/4"],
-  data: [40, 20, 30, 21, 14, 38, 20, 35],
-};
-
-const datMedium = {
-  lebels: [
-    "1/3",
-    "2/4",
-    "1/4",
-    "3/4",
-    "2/2 ",
-    "2/3",
-    "2/4",
-    "1/3",
-    "2/4",
-    "1/4",
-    "3/4",
-    "2/2 ",
-    "2/3",
-  ],
-  data: [40, 20, 30, 21, 14, 38, 20, 35, 27, 16, 34, 21, 26],
-};
+const store = useStore();
 
 const customLabelsPlugin = {
   id: "customLabels",
@@ -155,11 +125,11 @@ const customLabelsPlugin2 = {
 };
 
 const data = ref({
-  labels: props.size == "small" ? dataSmall.lebels : datMedium.lebels,
+  labels: [],
   datasets: [
     {
       label: "Sales",
-      data: props.size == "small" ? dataSmall.data : datMedium.data,
+      data: [],
       backgroundColor: "#6AD2FF",
       borderRadius: 25,
       borderSkipped: false,
@@ -169,17 +139,49 @@ const data = ref({
 });
 
 const data2 = ref({
-  labels: props.size == "small" ? dataSmall.lebels : datMedium.lebels,
+  labels: [],
   datasets: [
     {
       label: "Sales2",
-      data: props.size == "small" ? dataSmall.data : datMedium.data,
+      data: [],
       backgroundColor: "#FD9089",
       borderRadius: 25,
       borderSkipped: false,
       barThickness: 30,
     },
   ],
+});
+
+watchEffect(() => {
+  if (props.data && props.data.length > 0) {
+    data.value = {
+      labels: props.data.map((item) => item.title),
+      datasets: [
+        {
+          label: "Sales",
+          data: props.data.map((item) => item.spend),
+          backgroundColor: "#6AD2FF",
+          borderRadius: 25,
+          borderSkipped: false,
+          barThickness: 30,
+        },
+      ],
+    };
+
+    data2.value = {
+      labels: props.data.map((item) => item.title),
+      datasets: [
+        {
+          label: "Sales2",
+          data: props.data.map((item) => item.revenue),
+          backgroundColor: "#FD9089",
+          borderRadius: 25,
+          borderSkipped: false,
+          barThickness: 30,
+        },
+      ],
+    };
+  }
 });
 
 const options = ref({

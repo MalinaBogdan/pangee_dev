@@ -1,8 +1,6 @@
 <template>
   <div class="app">
-    <div class="chat-icon-wrapper">
-      <ChatIcon />
-    </div>
+    <ChatIcon />
 
     <BaseHeader />
     <RouterView />

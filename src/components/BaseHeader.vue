@@ -2,15 +2,12 @@
   <div class="base-header">
     <div class="menu">
       <RouterLink to="/"
-        ><div class="item" :class="{ active: path == '/' }">
-          Home
-        </div></RouterLink
+        ><div class="item" :class="{ active: path == '/' }">Home</div></RouterLink
       >
       <div
         class="item"
         @click="
-          store.openMenu =
-            store.openMenu == 'InternalDocument' ? '' : 'InternalDocument'
+          store.openMenu = store.openMenu == 'InternalDocument' ? '' : 'InternalDocument'
         "
         :class="{ active: store.openMenu == 'InternalDocument' }"
       >
@@ -34,15 +31,11 @@
         </div></RouterLink
       >
       <RouterLink to="/open-source"
-        ><div class="item" :class="{ active: path == '/open-source' }">
-          Open Source
-        </div>
+        ><div class="item" :class="{ active: path == '/open-source' }">Open Source</div>
       </RouterLink>
       <div
         class="item"
-        @click="
-          store.openMenu = store.openMenu == 'Ecommerce' ? '' : 'Ecommerce'
-        "
+        @click="store.openMenu = store.openMenu == 'Ecommerce' ? '' : 'Ecommerce'"
         :class="{ active: store.openMenu == 'Ecommerce' }"
       >
         Ecommerce
@@ -60,9 +53,7 @@
         </svg>
       </div>
       <RouterLink to="/financials"
-        ><div class="item" :class="{ active: path == '/financials' }">
-          Financials
-        </div>
+        ><div class="item" :class="{ active: path == '/financials' }">Financials</div>
       </RouterLink>
     </div>
     <InternalDocument
@@ -86,8 +77,6 @@ import { vOnClickOutside } from "@vueuse/components";
 import { useStore } from "@/store";
 
 const store = useStore();
-
-console.log(store.openMenu, "store");
 
 const router = useRouter();
 const path = computed(() => router.currentRoute.value.path);

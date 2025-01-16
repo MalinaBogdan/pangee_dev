@@ -6,6 +6,7 @@
     .row {
         display: flex;
         justify-content: space-between;
+        width: 100%;
     }
 
     .col {
@@ -67,7 +68,6 @@
         border-radius: 20px;
         border: 1px solid white;
         padding: 40px;
-
         margin-top: 20px;
 
         .title {

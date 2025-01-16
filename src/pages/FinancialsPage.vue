@@ -48,10 +48,7 @@
               />
             </svg>
           </div>
-          <div
-            class="date-picker-wrap"
-            v-on-click-outside="() => (showCalendar = false)"
-          >
+          <div class="date-picker-wrap" v-on-click-outside="() => (showCalendar = false)">
             <VDatePicker
               v-if="showCalendar"
               v-model.range="dateRange"
@@ -108,7 +105,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, inject, onMounted } from "vue";
 import FiltersMain from "@/components/FiltersMain.vue";
 import draggable from "vuedraggable";
 
@@ -122,6 +119,18 @@ import { vOnClickOutside } from "@vueuse/components";
 
 import { format } from "date-fns";
 
+const axios = inject("axios");
+let widgets = ref({});
+let ecommerceSalesData = ref({});
+let documentAccessData = ref({});
+let quickOverviewData = ref({});
+let amountSpendData = ref({});
+let categoriesTrendData = ref({});
+let topProductsData = ref({});
+let revenueDataSpendData = ref({});
+let revenueTrendsData = ref({});
+let topKeywordsData = ref({});
+
 const dateRange = ref({
   start: new Date(),
   end: new Date(),
@@ -133,14 +142,14 @@ const rules = {
 let showCalendar = ref(false);
 
 let list = ref([
-  { id: 2, component: TopKeywords },
-  { id: 2, component: DataSpend, props: { size: "large" } },
+  { id: 2, component: TopKeywords, props: { data: topKeywordsData } },
+  { id: 2, component: DataSpend, props: { data: revenueDataSpendData } },
 ]);
 
 let list2 = ref([
-  { id: 5, component: QuickOverView },
-  { id: 6, component: CategoriesTrend },
-  { id: 7, component: RevenueTrends },
+  { id: 5, component: QuickOverView, props: { data: quickOverviewData } },
+  { id: 6, component: CategoriesTrend, props: { data: categoriesTrendData } },
+  { id: 7, component: RevenueTrends, props: { data: revenueTrendsData } },
 ]);
 
 const formattedDateRange = computed(() => {
@@ -151,6 +160,49 @@ const formattedDateRange = computed(() => {
   const formattedEnd = format(new Date(end), "MMMM d, yyyy");
 
   return `${formattedStart} - ${formattedEnd}`;
+});
+
+onMounted(async () => {
+  axios.get("/api/dashboard/1f0a1576-be8c-4cf7-8f81-6f245d0ea40e").then((data) => {
+    widgets.value = data.data.widgets;
+
+    widgets.value.forEach((element) => {
+      switch (element.type) {
+        case "ecommerce-sales":
+          ecommerceSalesData.value = element.data;
+          break;
+        case "document-access":
+          documentAccessData.value = element.data;
+          break;
+        case "quick-overview":
+          quickOverviewData.value = element.data;
+          break;
+        case "amount-spend":
+          amountSpendData.value = element.data;
+          break;
+        case "categories-trend":
+          categoriesTrendData.value = element.data;
+          break;
+        case "top-products":
+          topProductsData.value = element.data;
+          break;
+        case "revenue-vs-data-spend":
+          revenueDataSpendData.value = element.data;
+          break;
+        case "revenue-trends":
+          revenueTrendsData.value = element.data;
+          break;
+        case "top-keywords":
+          topKeywordsData.value = element.data;
+          break;
+
+        default:
+          break;
+      }
+    });
+
+    console.log(widgets, "widgets");
+  });
 });
 </script>
 

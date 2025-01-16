@@ -2,32 +2,30 @@
   <div class="widget">
     <div class="title">Top Products</div>
 
-    <div class="products">
-      <div class="product" v-for="(product, i) in products" :key="i">
-        <img :src="product" alt="" />
+    <div v-if="store.showLoader">
+      <Loader />
+    </div>
+
+    <div v-else class="products">
+      <div class="product" v-for="(product, i) in props.data" :key="i">
+        <img :src="product.imageUrl" alt="" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { defineProps } from "vue";
+import { useStore } from "@/store";
+import Loader from "@/components/LoaderWidget.vue";
 
-import product1 from "@/assets/images/product1.png";
-import product2 from "@/assets/images/product2.png";
-import product3 from "@/assets/images/product3.png";
-import product4 from "@/assets/images/product4.png";
-import product5 from "@/assets/images/product5.png";
-import product6 from "@/assets/images/product6.png";
+const props = defineProps({
+  data: {
+    type: Object,
+  },
+});
 
-const products = ref([
-  product1,
-  product2,
-  product3,
-  product4,
-  product5,
-  product6,
-]);
+const store = useStore();
 </script>
 
 <style lang="scss"></style>

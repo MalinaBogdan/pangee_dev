@@ -168,11 +168,8 @@
 
       <div class="sub-title">{{ subMenu.itemsName }}</div>
       <div class="sub-item" v-for="(subItem, i) in subMenu.items" :key="i">
-        <RouterLink
-          :to="{ path: '/internal' + i }"
-          @click="store.openMenu = ''"
-        >
-          {{ subItem }}
+        <RouterLink :to="{ path: '/internal' + i }" @click="store.openMenu = ''">
+          {{ subItem.title }}
         </RouterLink>
       </div>
     </div>
@@ -182,13 +179,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, inject, onMounted } from "vue";
 import Search from "./SearchElement.vue";
 import { vOnClickOutside } from "@vueuse/components";
 import { useRouter, RouterLink } from "vue-router";
 import { useStore } from "@/store";
 
+const axios = inject("axios");
+
 const store = useStore();
+const campaingsMenu = ref();
+const publishersMenu = ref();
 
 const router = useRouter();
 const path = router.currentRoute.value.path;
@@ -198,6 +199,27 @@ const subMenu = ref({});
 const showSearch = ref(false);
 
 let colorArrow = "";
+
+onMounted(async () => {
+  axios.get("/api/campaings").then((data) => {
+    campaingsMenu.value = data.data;
+
+    menu.value.forEach((item) => {
+      if (item.title == "Campaigns") {
+        item.items = data.data;
+      }
+    });
+  });
+  axios.get("/api/publishers/menu").then((data) => {
+    publishersMenu.value = data.data;
+
+    menu.value.forEach((item) => {
+      if (item.title == "Publishers") {
+        item.items = data.data;
+      }
+    });
+  });
+});
 
 function selectColorArrow() {
   if (path === "/" || path === "/publishers" || path.includes("/internal")) {
@@ -232,15 +254,7 @@ const menu = ref([
   {
     title: "Publishers",
     itemsName: "Publishers Name",
-    items: [
-      "Vogue",
-      "Elle",
-      "Conde Nast",
-      "Versace",
-      "Gucci",
-      "Parada",
-      "Channel",
-    ],
+    items: ["Vogue", "Elle", "Conde Nast", "Versace", "Gucci", "Parada", "Channel"],
   },
   {
     title: "Performance",

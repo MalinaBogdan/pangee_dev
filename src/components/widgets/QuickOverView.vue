@@ -1,42 +1,24 @@
 <template>
   <div class="widget quick">
     <div class="title">Quick OverView</div>
-    <div class="row mt40">
-      <div class="left">Total Page Views</div>
+
+    <div class="row" v-for="(field, i) in props.data" :key="i">
+      <div class="left">{{ field.title }}</div>
       <div class="right">
-        {{ data.total }}
-      </div>
-    </div>
-    <div class="row">
-      <div class="left">Unique Visitors</div>
-      <div class="right">
-        {{ data.iniqVisitors }}
-      </div>
-    </div>
-    <div class="row">
-      <div class="left">Average Time on Page</div>
-      <div class="right">
-        {{ data.averageTime }}
-        <div class="time">sec</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="left">Total Pages Saved</div>
-      <div class="right">
-        {{ data.totalPages }}
+        {{ field.value }}
+        <div class="time" v-if="field.title == 'Average Time on Page'">sec</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { defineProps } from "vue";
 
-const data = ref({
-  total: "2,249",
-  iniqVisitors: "429",
-  averageTime: "83",
-  totalPages: "129",
+const props = defineProps({
+  data: {
+    type: Object,
+  },
 });
 </script>
 
