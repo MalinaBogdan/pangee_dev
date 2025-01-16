@@ -66,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref, inject, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import draggable from "vuedraggable";
 
 import EcommerceSales from "@/components/widgets/EcommerceSales.vue";
@@ -78,10 +78,9 @@ import TopKeywords from "@/components/widgets/TopKeywords.vue";
 import QuickOverView from "@/components/widgets/QuickOverView.vue";
 import CategoriesTrend from "@/components/widgets/CategoriesTrend.vue";
 import RevenueTrends from "@/components/widgets/RevenueTrends.vue";
-
+import apiClient from "@/services/api";
 import { useStore } from "@/store";
 
-const axios = inject("axios");
 const store = useStore();
 
 let widgets = ref({});
@@ -95,12 +94,11 @@ let revenueDataSpendData = ref({});
 let revenueTrendsData = ref({});
 let topKeywordsData = ref({});
 
-const apiBaseUrl = process.env.VUE_APP_API_BASE_URL;
-console.log("API Base URL:", apiBaseUrl);
-
 onMounted(async () => {
   store.showLoader = true;
-  axios.get("/api/dashboard/2c1d233b-5aad-465c-82c8-6921067ae368").then((data) => {
+  apiClient.get("/api/dashboard/2c1d233b-5aad-465c-82c8-6921067ae368").then((data) => {
+    console.log(data, "data");
+
     widgets.value = data.data.widgets;
 
     widgets.value.forEach((element) => {
