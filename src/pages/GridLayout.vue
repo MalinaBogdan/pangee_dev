@@ -95,6 +95,9 @@ let revenueDataSpendData = ref({});
 let revenueTrendsData = ref({});
 let topKeywordsData = ref({});
 
+const apiBaseUrl = process.env.VUE_APP_API_BASE_URL;
+console.log("API Base URL:", apiBaseUrl);
+
 onMounted(async () => {
   store.showLoader = true;
   axios.get("/api/dashboard/2c1d233b-5aad-465c-82c8-6921067ae368").then((data) => {
