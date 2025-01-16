@@ -96,48 +96,53 @@ let topKeywordsData = ref({});
 
 onMounted(async () => {
   store.showLoader = true;
-  apiClient.get("/api/dashboard/2c1d233b-5aad-465c-82c8-6921067ae368").then((data) => {
-    console.log(data, "data");
 
-    widgets.value = data.data.widgets;
+  try {
+    apiClient.get("/api/dashboard/2c1d233b-5aad-465c-82c8-6921067ae368").then((data) => {
+      console.log(data, "data");
 
-    widgets.value.forEach((element) => {
-      switch (element.type) {
-        case "ecommerce-sales":
-          ecommerceSalesData.value = element.data;
-          break;
-        case "document-access":
-          documentAccessData.value = element.data;
-          break;
-        case "quick-overview":
-          quickOverviewData.value = element.data;
-          break;
-        case "amount-spend":
-          amountSpendData.value = element.data;
-          break;
-        case "categories-trend":
-          categoriesTrendData.value = element.data;
-          break;
-        case "top-products":
-          topProductsData.value = element.data;
-          break;
-        case "revenue-vs-data-spend":
-          revenueDataSpendData.value = element.data;
-          break;
-        case "revenue-trends":
-          revenueTrendsData.value = element.data;
-          break;
-        case "top-keywords":
-          topKeywordsData.value = element.data;
-          break;
+      widgets.value = data.data.widgets;
 
-        default:
-          break;
-      }
+      widgets.value.forEach((element) => {
+        switch (element.type) {
+          case "ecommerce-sales":
+            ecommerceSalesData.value = element.data;
+            break;
+          case "document-access":
+            documentAccessData.value = element.data;
+            break;
+          case "quick-overview":
+            quickOverviewData.value = element.data;
+            break;
+          case "amount-spend":
+            amountSpendData.value = element.data;
+            break;
+          case "categories-trend":
+            categoriesTrendData.value = element.data;
+            break;
+          case "top-products":
+            topProductsData.value = element.data;
+            break;
+          case "revenue-vs-data-spend":
+            revenueDataSpendData.value = element.data;
+            break;
+          case "revenue-trends":
+            revenueTrendsData.value = element.data;
+            break;
+          case "top-keywords":
+            topKeywordsData.value = element.data;
+            break;
+
+          default:
+            break;
+        }
+      });
+
+      store.showLoader = false;
     });
-
-    store.showLoader = false;
-  });
+  } catch (error) {
+    console.log(error, "error");
+  }
 });
 
 let list1 = ref([
