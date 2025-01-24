@@ -21,28 +21,21 @@
       </div>
       <div class="left">
         <div class="title">Sub Menu</div>
+
         <div class="sub-menu">
-          <div
-            class="item"
-            v-for="(item, i) in menu"
-            :key="i"
-            @mouseover="subMenu = Object.assign(item, { index: i })"
-          >
-            {{ item.title }}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="11"
-              viewBox="0 0 8 11"
-              fill="none"
-              v-if="item.items"
-            >
-              <path
-                d="M2.12246 0.315042L6.80996 5.00254C6.87551 5.06786 6.92752 5.14548 6.963 5.23095C6.99849 5.31642 7.01676 5.40805 7.01676 5.50059C7.01676 5.59313 6.99849 5.68476 6.963 5.77023C6.92752 5.85569 6.87551 5.93331 6.80996 5.99864L2.12246 10.6861C1.99037 10.8182 1.81121 10.8924 1.62441 10.8924C1.43761 10.8924 1.25845 10.8182 1.12636 10.6861C0.994273 10.554 0.920065 10.3749 0.920065 10.1881C0.920065 10.0013 0.994273 9.82213 1.12636 9.69004L5.3164 5.5L1.12578 1.30996C0.993687 1.17787 0.919479 0.998722 0.919479 0.811918C0.919479 0.625114 0.993687 0.445961 1.12578 0.313871C1.25787 0.181781 1.43702 0.107572 1.62382 0.107572C1.81063 0.107572 1.98978 0.181781 2.12187 0.313871L2.12246 0.315042Z"
-                fill="#343330"
-              />
-            </svg>
-          </div>
+          <RouterLink :to="{ path: '/publishers' }" @click="store.openMenu = ''">
+            Publishers
+          </RouterLink>
+        </div>
+        <div class="sub-menu">
+          <RouterLink :to="{ path: '/chat-configuration' }" @click="store.openMenu = ''">
+            Chat Config
+          </RouterLink>
+        </div>
+        <div class="sub-menu">
+          <RouterLink :to="{ path: '/media' }" @click="store.openMenu = ''">
+            Media
+          </RouterLink>
         </div>
       </div>
       <div class="right">
