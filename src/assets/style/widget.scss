@@ -173,7 +173,7 @@
         }
     }
 
-    &.quick {
+    &.quick, &.articles, &.grossing {
         padding-bottom: 40px;
 
         .row {
@@ -190,6 +190,14 @@
                 .time {
                     color: #797b79;
                 }
+            }
+        }
+    }
+
+    &.grossing {
+        .row {
+            .left {
+                font-size: 13px;
             }
         }
     }

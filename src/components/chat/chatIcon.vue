@@ -1,6 +1,8 @@
 <template>
   <div class="chat-wrap" v-on-click-outside="() => (activeChat = false)">
-    <div class="chat-content" v-if="activeChat"></div>
+    <div class="chat-content" v-if="activeChat">
+      <ChatContent />
+    </div>
     <div class="chat-icon closed" v-if="!activeChat" @click="activeChat = true">
       <svg
         width="32"
@@ -68,6 +70,7 @@
 <script setup>
 import { ref } from "vue";
 import { vOnClickOutside } from "@vueuse/components";
+import ChatContent from "@/components/chat/chatContent";
 
 const activeChat = ref(false);
 </script>
